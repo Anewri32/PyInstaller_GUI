@@ -18,7 +18,7 @@ onefile=IntVar()
 icon=IntVar()
 file_ico=StringVar()
 file_py=StringVar()
-guardado=StringVar()
+#guardado=StringVar()
 #------------------------------------------------------IDIOMA----------------------------------------------------
 
 
