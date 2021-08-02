@@ -1,0 +1,3 @@
+The program requires python version 3 and pyinstaller to be installed on the computer.
+
+The exe called "py_extencion" is used to run the pyinstaller commands.
