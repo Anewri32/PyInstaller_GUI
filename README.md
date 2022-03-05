@@ -1,6 +1,6 @@
 # PyInstaller_GUI
-This repository contains the python 3 pyinstaller script brought to all of us in a graphical way to make it a little easier for us when creating executable programs.
+Este repositorio contiene el script Pyinstalle de forma gráfica para facilitarnos un poco la creación de programas ejecutables.
 
-This is an initiative to transport those vital tools that we use when programming in python, thus we save time since instead of writing the only thing we will have to do is give a couple of clicks.
+Esta es una iniciativa para transportar esas herramientas vitales que usamos cuando programamos en python, así ahorramos tiempo ya que en lugar de escribir y memorizar codigo, lo único que tendremos que hacer será dar un par de clics.
 
-You are free to add or modify what you like, let's perfect this graphic tool together.
+Eres libre de agregar o modificar lo que quieras, perfeccionemos juntos esta herramienta gráfica.
