@@ -24,7 +24,8 @@ key = StringVar()
 clean = BooleanVar()
 admin = BooleanVar()
 directorio_actual = ""
-file_version_name = "lib/VSVersionInfo.temp"
+#El siguiente codigo forma parte de una proxima actualizacion
+#file_version_name = "lib/VSVersionInfo.temp"
 
 entry1_a = StringVar()#Aqui va la ruta del archivo o carpeta de origen
 entry1_b = StringVar()#Aqui va la carpeta de destino
@@ -313,8 +314,8 @@ def Icon():
     else:
         icono_boton.grid_remove()
         icono_entrada.grid_remove()
-
-def opciones_avanzadas():
+#El siguiente codigo forma parte de una proxima actualizacion.
+"""def opciones_avanzadas():
     
     file_version = """VSVersionInfo(
       ffi=FixedFileInfo(
@@ -344,7 +345,7 @@ def opciones_avanzadas():
         VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
       ]
     )"""
-
+"""
     archivo = open(file_version_name, "w")
     archivo.write(file_version)
     archivo.close()
@@ -511,8 +512,11 @@ Button(frame, text="Agregar carpeta", command=agregar_carpeta).grid(row=8, colum
 
 
 
+#El siguiente codigo forma parte de una proxima actualizacion
+#Button(frame, text="Opciones avanzadas", command=opciones_avanzadas).grid(row=5, column=7, rowspan=3)
 
-Button(frame, text="Opciones avanzadas", command=opciones_avanzadas).grid(row=5, column=7, rowspan=3)
+
+
 Button(frame, text=words[7], command=Build, font=12, bd=5).grid(row=9, column=7, padx=10, rowspan=2)
 
 
