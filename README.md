@@ -30,12 +30,7 @@ Pyinstaller y PyInstaller_GUI dan la posibilidad de añadir archivos al exe, per
 
 A continuacion un ejemplo de lo que seria una funcion que resuelve rutas:
 
-import os, sys
-
-def resolver_ruta(ruta_relativa):
-    if hasattr(sys, '_MEIPASS'):
-        return os.path.join(sys._MEIPASS, ruta_relativa)
-    return os.path.join(os.path.abspath('.'), ruta_relativa)
+https://github.com/anewri32/PyInstaller_GUI/blob/main/Resolver_ruta.py
 
 
     
