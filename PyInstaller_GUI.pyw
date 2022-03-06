@@ -317,7 +317,7 @@ def Icon():
 #El siguiente codigo forma parte de una proxima actualizacion.
 """def opciones_avanzadas():
     
-    file_version = """VSVersionInfo(
+    file_version = VSVersionInfo(
       ffi=FixedFileInfo(
         filevers=(6, 1, 7601, 17514),
         prodvers=(6, 1, 7601, 17514),
@@ -344,11 +344,11 @@ def Icon():
           ]), 
         VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
       ]
-    )"""
-"""
+    )
+
     archivo = open(file_version_name, "w")
     archivo.write(file_version)
-    archivo.close()
+    archivo.close()"""
     
 
 
