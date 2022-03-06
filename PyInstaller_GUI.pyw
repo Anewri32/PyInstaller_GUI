@@ -1,18 +1,19 @@
 from tkinter import BooleanVar, Tk, Frame, StringVar, Label, Entry, Button, Menu, \
-    Checkbutton, filedialog
+    Checkbutton, filedialog, Toplevel
 from tkinter.messagebox import showinfo, showwarning
 from subprocess import call
 from os.path import dirname
+
 # ------------------------------------------------------CORE_INTERFACE---------------------------------------------
 root = Tk()
 root.iconbitmap('lib/icon.ico')
 barra_menu = Menu(root)
 root.config(menu=barra_menu)
-root.title("PyInstaller GUI v1.1")
-#root.attributes("-alpha", 0.9)
+root.title("PyInstaller GUI v2.0")
 root.resizable(0, 0)
 frame = Frame(root).grid(row=0, column=0)
 
+root2 = None
 # -----------------------------------------------------VARIABLES---------------------------------------------------
 windowed = BooleanVar()
 onefile = BooleanVar()
@@ -24,8 +25,7 @@ key = StringVar()
 clean = BooleanVar()
 admin = BooleanVar()
 directorio_actual = ""
-#El siguiente codigo forma parte de una proxima actualizacion
-#file_version_name = "lib/VSVersionInfo.temp"
+
 
 entry1_a = StringVar()#Aqui va la ruta del archivo o carpeta de origen
 entry1_b = StringVar()#Aqui va la carpeta de destino
@@ -40,9 +40,21 @@ entry5_b = StringVar()
 entry6_a = StringVar()
 entry6_b = StringVar()
 
+#Variables para las opciones avanzadas "Archivo de version"
+
+var_file_version = BooleanVar()
+var_status_file_version = StringVar()
+file_version_name = "lib/VSVersionInfo.temp"
 
 
-
+CompanyName = StringVar()
+FileDescription = StringVar()
+FileVersion = StringVar()
+InternalName = StringVar()
+LegalCopyright = StringVar()
+OriginalFilename = StringVar()
+ProductName = StringVar()
+ProductVersion = StringVar()
 # ------------------------------------------------------IDIOMA----------------------------------------------------
 
 try:
@@ -73,6 +85,16 @@ try:
     admin.set(datos_guardados[20]), #20
 
     directorio_actual = datos_guardados[21], #21
+
+    var_file_version.set(datos_guardados[22]), #22
+    CompanyName.set(datos_guardados[23]), #23
+    FileDescription.set(datos_guardados[24]), #24
+    FileVersion.set(datos_guardados[25]), #25
+    InternalName.set(datos_guardados[26]), #26
+    LegalCopyright.set(datos_guardados[27]), #27
+    OriginalFilename.set(datos_guardados[28]), #28
+    ProductName.set(datos_guardados[29]), #29
+    ProductVersion.set(datos_guardados[30]), #30
     
 
 
@@ -98,7 +120,16 @@ except:
     "", #18
     "", #19
     False, #20
-    "",
+    "", #21
+    False, #22
+    "", #23
+    "", #24
+    "", #25
+    "", #26
+    "", #27
+    "", #28
+    "", #29
+    "", #30
     ]
     language="en"   
 
@@ -284,8 +315,8 @@ def preparando_archivos():
         diccionario[temp_entry6_a]=temp_entry6_b
 
     instrucciones = ""
-    for i in diccionario:
-        instrucciones+= "--add-data="+i+";"+diccionario[i]+" "
+    for key, value in diccionario.items():
+        instrucciones+= "--add-data="+key+";"+value+" "
 
     return instrucciones
 
@@ -314,43 +345,130 @@ def Icon():
     else:
         icono_boton.grid_remove()
         icono_entrada.grid_remove()
-#El siguiente codigo forma parte de una proxima actualizacion.
-"""def opciones_avanzadas():
-    
-    file_version = VSVersionInfo(
-      ffi=FixedFileInfo(
-        filevers=(6, 1, 7601, 17514),
-        prodvers=(6, 1, 7601, 17514),
-        mask=0x3f,
-        flags=0x0,
-        OS=0x40004,
-        fileType=0x1,
-        subtype=0x0,
-        date=(0, 0)
-        ),
-      kids=[
-        StringFileInfo(
-          [
-          StringTable(
-            u'040904B0',
-            [StringStruct(u'CompanyName', u'ASNOR'),
-            StringStruct(u'FileDescription', u'HotsPot'),
-            StringStruct(u'FileVersion', u'1.1 (win7sp1_rtm.101119-1850)'), 
-            StringStruct(u'InternalName', u'HotsPot'),
-            StringStruct(u'LegalCopyright', u'\xa9 ASNOR. All rights reserved.'),
-            StringStruct(u'OriginalFilename', u'HotsPot.exe'),
-            StringStruct(u'ProductName', u'HotsPot\xae'),
-            StringStruct(u'ProductVersion', u'1.1')])
-          ]), 
+
+
+
+def opciones_avanzadas(op):
+    global var_status_file_version
+    def start():
+        global root2
+        root2 = Toplevel()
+        root2.iconbitmap('lib/icon.ico')
+        root2.title("PyInstaller GUI v1.1 - Archivo de version")
+        root2.resizable(0, 0)
+
+
+		
+
+        global CompanyName, FileDescription, FileVersion, InternalName, LegalCopyright, OriginalFilename, ProductName, ProductVersion, FileDescription_entry, FileVersion_entry, InternalName_entry, LegalCopyright_entry, OriginalFilename_entry, ProductName_entry, ProductVersion_entry, var_status_file_version
+        
+        label1 = Label(root2, text="CompanyName:")
+        entry1 = Entry(root2, width=66, textvariable=CompanyName)
+        label2 = Label(root2, text="FileDescription:")
+        entry2 = Entry(root2, width=66, textvariable=FileDescription)
+        label3 = Label(root2, text="FileVersion:")
+        entry3 = Entry(root2, width=66, textvariable=FileVersion)
+        label4 = Label(root2, text="InternalName:")
+        entry4 = Entry(root2, width=66, textvariable=InternalName)
+        label5 = Label(root2, text="LegalCopyright:")
+        entry5 = Entry(root2, width=66, textvariable=LegalCopyright)
+        label6 = Label(root2, text="OriginalFilename:")
+        entry6 = Entry(root2, width=66, textvariable=OriginalFilename)
+        label7 = Label(root2, text="ProductName:")
+        entry7 = Entry(root2, width=66, textvariable=ProductName)
+        label8 = Label(root2, text="ProductVersion:")
+        entry8 = Entry(root2, width=66, textvariable=ProductVersion)
+        Button(root2, text="Guardar", command=lambda:opciones_avanzadas("03")).grid(row=8, column=0, columnspan=2)
+        Button(root2, text="Cancelar", command=lambda:opciones_avanzadas("02")).grid(row=8, column=2, columnspan=2)
+
+
+
+
+        label1.grid(row=0, column=0, pady=2.5)
+        entry1.grid(row=0, column=1, pady=2.5, columnspan=5)
+        label2.grid(row=1, column=0, pady=2.5)
+        entry2.grid(row=1, column=1, pady=2.5, columnspan=5)
+        label3.grid(row=2, column=0, pady=2.5)
+        entry3.grid(row=2, column=1, pady=2.5, columnspan=5)
+        label4.grid(row=3, column=0, pady=2.5)
+        entry4.grid(row=3, column=1, pady=2.5, columnspan=5)
+        label5.grid(row=4, column=0, pady=2.5)
+        entry5.grid(row=4, column=1, pady=2.5, columnspan=5)
+        label6.grid(row=5, column=0, pady=2.5)
+        entry6.grid(row=5, column=1, pady=2.5, columnspan=5)
+        label7.grid(row=6, column=0, pady=2.5)
+        entry7.grid(row=6, column=1, pady=2.5, columnspan=5)
+        label8.grid(row=7, column=0, pady=2.5)
+        entry8.grid(row=7, column=1, pady=2.5, columnspan=5)
+
+
+        root2.mainloop()
+
+		
+
+    def stop():
+        if root2:
+            root2.destroy()
+
+    if op=="01":
+        if var_file_version.get():
+            start()
+        else:
+            stop()
+    elif op=="02":
+        stop()
+
+    elif op=="03":
+        
+        global CompanyName, FileDescription, FileVersion, InternalName, LegalCopyright, OriginalFilename, ProductName, ProductVersion, FileDescription_entry, FileVersion_entry, InternalName_entry, LegalCopyright_entry, OriginalFilename_entry, ProductName_entry, ProductVersion_entry, var_status_file_version
+        
+
+        CompanyName2 = CompanyName.get()
+        FileDescription2 = FileDescription.get()
+        FileVersion2 = FileVersion.get()
+        InternalName2 = InternalName.get()
+        LegalCopyright2 = LegalCopyright.get()
+        OriginalFilename2 = OriginalFilename.get()
+        ProductName2 = ProductName.get()
+        ProductVersion2 = ProductVersion.get()
+
+
+        file_version = """
+VSVersionInfo(
+	ffi=FixedFileInfo(
+		filevers=(6, 1, 7601, 17514),
+		prodvers=(6, 1, 7601, 17514),
+		mask=0x3f,
+		flags=0x0,
+		OS=0x40004,
+		fileType=0x1,
+		subtype=0x0,
+		date=(0, 0)
+	),
+	kids=[
+		StringFileInfo(
+            [
+                StringTable(
+                    u'040904B0',
+                    [StringStruct(u'CompanyName', u'"""+CompanyName2+"""'),
+                        StringStruct(u'FileDescription', u'"""+FileDescription2+"""'),
+                        StringStruct(u'FileVersion', u'"""+FileVersion2+""" (win7sp1_rtm.101119-1850)'), 
+                        StringStruct(u'InternalName', u'"""+InternalName2+"""'),
+                        StringStruct(u'LegalCopyright', u'"""+LegalCopyright2+"""'),
+                        StringStruct(u'OriginalFilename', u'"""+OriginalFilename2+"""'),
+                        StringStruct(u'ProductName', u'"""+ProductName2+"""'),
+                        StringStruct(u'ProductVersion', u'"""+ProductVersion2+"""')
+                    ]
+                )
+            ]
+        ), 
         VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
-      ]
-    )
-
-    archivo = open(file_version_name, "w")
-    archivo.write(file_version)
-    archivo.close()"""
-    
-
+    ]
+)"""
+        archivo = open(file_version_name, "w")
+        archivo.write(file_version)
+        archivo.close()
+        var_status_file_version.set("*ArchivoVersion creado")
 
 
 def Build():
@@ -399,7 +517,8 @@ def Build():
         #La siguiente funcion recolecta los archivos y carpetas para ser añadidas al ejecutable
         ordenes+=preparando_archivos()       
 
-        #ordenes+= "--version-file=C:/Users/ASNOR/OneDrive/Documents/Programacion/Python/Proyectos/PyInstaller_GUI/PyInstaller_GUI/VSVersionInfo.py "
+        if var_file_version.get() and var_status_file_version.get()!="?":
+            ordenes+=" --version-file=" + file_version_name + " "
 
         ordenes += file_py.get()
 
@@ -426,6 +545,16 @@ def Build():
                 entry6_b.get(), #19
                 admin.get(), #20
                 directorio_actual, #21
+
+                var_file_version.get(), #22
+                CompanyName.get(), #23
+                FileDescription.get(), #24
+                FileVersion.get(), #25
+                InternalName.get(), #26
+                LegalCopyright.get(), #27
+                OriginalFilename.get(), #28
+                ProductName.get(), #29
+                ProductVersion.get(), #30
             ]
 
             archivo = open(file, "w")
@@ -463,7 +592,7 @@ Checkbutton(frame, text=words[6], variable=icon, command=Icon).grid(row=1, colum
 
 Checkbutton(frame, text=words[5], variable=onefile).grid(row=1, column=1)
 
-#Checkbutton(frame).grid(row=1, column=2)
+
 
 Checkbutton(frame, text=words[4], variable=windowed).grid(row=1, column=3)
 
@@ -512,9 +641,10 @@ Button(frame, text="Agregar carpeta", command=agregar_carpeta).grid(row=8, colum
 
 
 
-#El siguiente codigo forma parte de una proxima actualizacion
-#Button(frame, text="Opciones avanzadas", command=opciones_avanzadas).grid(row=5, column=7, rowspan=3)
 
+Checkbutton(frame, text="Archivo de version", variable=var_file_version, command=lambda:opciones_avanzadas("01")).grid(row=5, column=7)
+caja_resultado = Label(frame, textvariable=var_status_file_version)
+caja_resultado.grid(row=6, column=7)
 
 
 Button(frame, text=words[7], command=Build, font=12, bd=5).grid(row=9, column=7, padx=10, rowspan=2)
@@ -523,19 +653,9 @@ Button(frame, text=words[7], command=Build, font=12, bd=5).grid(row=9, column=7,
 
 
 
+
 Icon()
 root.mainloop()
-
-
-
-
-
-
-
-
-
-
-
 
 
 
