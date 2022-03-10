@@ -246,11 +246,14 @@ def Abrir_icono():
     open_icon = filedialog.askopenfilename(initialdir=directorio_actual, title=words[14], filetypes=((".ico", "*.ico"), (".ico", "*.ico")))
     if ".ico" in open_icon:
         file_ico.set(open_icon)
+        asignar_entrys(open_icon)
         directorio_actual = dirname(open_icon)
 
 def asignar_entrys(valor):
 
-    if entry1_a.get()=="":
+    if (entry1_a.get() == valor) or (entry2_a.get() == valor) or (entry3_a.get() == valor) or (entry4_a.get() == valor) or (entry5_a.get() == valor) or (entry6_a.get() == valor):
+        return
+    elif entry1_a.get()=="":
         entry1_a.set(valor)
     elif entry2_a.get()=="":
         entry2_a.set(valor)
@@ -657,29 +660,17 @@ Entry(frame, textvariable=entry6_b).grid(row=10, column=6, padx=5)
 
 
 
-
 Button(frame, text="Agregar archivos", command=agregar_archivos).grid(row=5, column=0, rowspan=3)
 Label(frame, text="o").grid(row=6, column=0, rowspan=4)
 Button(frame, text="Agregar carpeta", command=agregar_carpeta).grid(row=8, column=0, rowspan=3)
-
-
-
 
 Checkbutton(frame, text="Archivo de version", variable=var_file_version, command=lambda:opciones_avanzadas("01")).grid(row=5, column=7)
 caja_resultado = Label(frame, textvariable=var_status_file_version)
 caja_resultado.grid(row=6, column=7)
 
-
 Button(frame, text=words[7], command=Build, font=12, bd=5).grid(row=9, column=7, padx=10, rowspan=2)
-
-
-
-
 
 
 Icon()
 root.mainloop()
-
-
-
 
