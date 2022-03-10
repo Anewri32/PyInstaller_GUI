@@ -2,7 +2,7 @@ from tkinter import BooleanVar, Tk, Frame, StringVar, Label, Entry, Button, Menu
     Checkbutton, filedialog, Toplevel
 from tkinter.messagebox import showinfo, showwarning
 from subprocess import call
-from os.path import dirname
+from os.path import dirname # Devuelve el directorio de un archivo
 
 # ------------------------------------------------------CORE_INTERFACE---------------------------------------------
 root = Tk()
@@ -44,6 +44,7 @@ entry6_b = StringVar()
 
 var_file_version = BooleanVar()
 var_status_file_version = StringVar()
+var_status_file_version.set("?")
 file_version_name = "lib/VSVersionInfo.temp"
 
 
@@ -426,6 +427,28 @@ def opciones_avanzadas(op):
         CompanyName2 = CompanyName.get()
         FileDescription2 = FileDescription.get()
         FileVersion2 = FileVersion.get()
+        FL = FileVersion2
+        
+        FL = FL.replace(".", ",").replace("v", "").replace("V", "")
+
+        FL = eval("["+FL+"]")
+
+        num = len(FL)
+
+        if num > 4:
+            showinfo("Error",
+                "'ProductVersion' solo admite 4 fracciones separadas por punto.\n\nEjemplo: '1.0.0.0', '5.432.567.12'")
+            return
+
+        else:
+            while num < 4:
+                FL.append(0)
+                num += 1
+
+        FL = str(FL)
+        FL = FL.replace("[", "").replace("]", "")
+  
+
         InternalName2 = InternalName.get()
         LegalCopyright2 = LegalCopyright.get()
         OriginalFilename2 = OriginalFilename.get()
@@ -436,8 +459,8 @@ def opciones_avanzadas(op):
         file_version = """
 VSVersionInfo(
 	ffi=FixedFileInfo(
-		filevers=(6, 1, 7601, 17514),
-		prodvers=(6, 1, 7601, 17514),
+		filevers=("""+FL+"""),
+		prodvers=("""+FL+"""),
 		mask=0x3f,
 		flags=0x0,
 		OS=0x40004,
