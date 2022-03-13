@@ -2,19 +2,13 @@ from tkinter import StringVar, BooleanVar, filedialog
 from tkinter.messagebox import showinfo, showwarning
 from subprocess import call
 from os.path import dirname # Devuelve el directorio de un archivo
-
-try:
-    from cryptocode import encrypt, decrypt
-except:
-    from subprocess import run
-    call("pip install cryptocode")
-    from cryptocode import encrypt, decrypt
+from cryptocode import encrypt, decrypt
 
 
 class Core:
 
     def __init__(self):
-        self.passkey = '6@2%*mNGf7rk@F' # Utilizada para encryptar la 'key' en el archivo 'data.py'
+        self.__passkey = '6@2%*mNGf7rk@F' # Utilizada para encryptar la 'key' en el archivo 'data.py'
         self.windowed = BooleanVar()
         self.onefile = BooleanVar()
         self.icon = BooleanVar()
@@ -61,54 +55,54 @@ class Core:
 
         try:
             archivo = open(self.file, "r")
-            self.datos_guardados = eval(archivo.read())
+            self.__datos_guardados = eval(archivo.read())
             archivo.close()
 
-            self.language = self.datos_guardados[0] #0
-            self.file_py.set(self.datos_guardados[1]) #1
-            self.windowed.set(self.datos_guardados[2]), #2
-            self.onefile.set(self.datos_guardados[3]), #3
-            self.icon.set(self.datos_guardados[4]), #4
-            self.file_ico.set(self.datos_guardados[5]), #5
-            self.key.set(decrypt(self.datos_guardados[6], self.passkey)), #6
-            self.clean.set(self.datos_guardados[7]), #7
-            self.entry1_a.set(self.datos_guardados[8]), #8
-            self.entry1_b.set(self.datos_guardados[9]), #9
-            self.entry2_a.set(self.datos_guardados[10]), #10
-            self.entry2_b.set(self.datos_guardados[11]), #11
-            self.entry3_a.set(self.datos_guardados[12]), #12
-            self.entry3_b.set(self.datos_guardados[13]), #13
-            self.entry4_a.set(self.datos_guardados[14]), #14
-            self.entry4_b.set(self.datos_guardados[15]), #15
-            self.entry5_a.set(self.datos_guardados[16]), #16
-            self.entry5_b.set(self.datos_guardados[17]), #17
-            self.entry6_a.set(self.datos_guardados[18]), #18
-            self.entry6_b.set(self.datos_guardados[19]), #19
-            self.admin.set(self.datos_guardados[20]), #20
+            self.language = self.__datos_guardados[0] #0
+            self.file_py.set(self.__datos_guardados[1]) #1
+            self.windowed.set(self.__datos_guardados[2]), #2
+            self.onefile.set(self.__datos_guardados[3]), #3
+            self.icon.set(self.__datos_guardados[4]), #4
+            self.file_ico.set(self.__datos_guardados[5]), #5
+            self.key.set(decrypt(self.__datos_guardados[6], self.__passkey)), #6
+            self.clean.set(self.__datos_guardados[7]), #7
+            self.entry1_a.set(self.__datos_guardados[8]), #8
+            self.entry1_b.set(self.__datos_guardados[9]), #9
+            self.entry2_a.set(self.__datos_guardados[10]), #10
+            self.entry2_b.set(self.__datos_guardados[11]), #11
+            self.entry3_a.set(self.__datos_guardados[12]), #12
+            self.entry3_b.set(self.__datos_guardados[13]), #13
+            self.entry4_a.set(self.__datos_guardados[14]), #14
+            self.entry4_b.set(self.__datos_guardados[15]), #15
+            self.entry5_a.set(self.__datos_guardados[16]), #16
+            self.entry5_b.set(self.__datos_guardados[17]), #17
+            self.entry6_a.set(self.__datos_guardados[18]), #18
+            self.entry6_b.set(self.__datos_guardados[19]), #19
+            self.admin.set(self.__datos_guardados[20]), #20
 
-            self.directorio_actual = self.datos_guardados[21], #21
+            self.directorio_actual = self.__datos_guardados[21], #21
 
-            self.var_file_version.set(self.datos_guardados[22]), #22
-            self.CompanyName.set(self.datos_guardados[23]), #23
-            self.FileDescription.set(self.datos_guardados[24]), #24
-            self.FileVersion.set(self.datos_guardados[25]), #25
-            self.InternalName.set(self.datos_guardados[26]), #26
-            self.LegalCopyright.set(self.datos_guardados[27]), #27
-            self.OriginalFilename.set(self.datos_guardados[28]), #28
-            self.ProductName.set(self.datos_guardados[29]), #29
-            self.ProductVersion.set(self.datos_guardados[30]), #30
+            self.var_file_version.set(self.__datos_guardados[22]), #22
+            self.CompanyName.set(self.__datos_guardados[23]), #23
+            self.FileDescription.set(self.__datos_guardados[24]), #24
+            self.FileVersion.set(self.__datos_guardados[25]), #25
+            self.InternalName.set(self.__datos_guardados[26]), #26
+            self.LegalCopyright.set(self.__datos_guardados[27]), #27
+            self.OriginalFilename.set(self.__datos_guardados[28]), #28
+            self.ProductName.set(self.__datos_guardados[29]), #29
+            self.ProductVersion.set(self.__datos_guardados[30]), #30
             
 
 
         except:
             self.language = "es"
-            self.datos_guardados = [self.language, #0
+            self.__datos_guardados = [self.language, #0
             "", #1
             False, #2
             False, #3
             False, #4
             "", #5
-            encrypt("", self.passkey), #6
+            encrypt("", self.__passkey), #6
             False, #7
             "", #8
             "", #9
@@ -192,8 +186,8 @@ class Core:
     def Cambiar_idioma(self, op):
         def cambio_idioma(op1):
             file_language = open(self.file, "w+")
-            self.datos_guardados[0] = op1
-            file_language.write(str(self.datos_guardados))
+            self.__datos_guardados[0] = op1
+            file_language.write(str(self.__datos_guardados))
             file_language.close()
             showinfo(self.words[12], self.words[13])
             
@@ -266,7 +260,7 @@ class Core:
             return False
 
 
-    def preparando_archivos(self):
+    def __preparando_archivos(self):
         diccionario = {}
 
         temp_entry1_a = self.entry1_a.get()
@@ -383,7 +377,7 @@ class Core:
                 ordenes+= "--uac-admin "
 
             #La siguiente funcion recolecta los archivos y carpetas para ser añadidas al ejecutable
-            ordenes+=self.preparando_archivos()       
+            ordenes+=self.__preparando_archivos()       
 
             if self.var_file_version.get() and self.var_status_file_version.get()!="?":
                 ordenes+=" --version-file=" + self.file_version_name + " "
@@ -391,13 +385,13 @@ class Core:
             ordenes += self.file_py.get()
 
             try:
-                self.datos_guardados = [self.language, #0
+                self.__datos_guardados = [self.language, #0
                     self.file_py.get(), #1
                     self.windowed.get(), #2
                     self.onefile.get(), #3
                     self.icon.get(), #4
                     self.file_ico.get(), #5
-                    encrypt(clave, self.passkey), #6
+                    encrypt(clave, self.__passkey), #6
                     self.clean.get(), #7
                     self.entry1_a.get(), #8
                     self.entry1_b.get(), #9
@@ -426,7 +420,7 @@ class Core:
                 ]
 
                 archivo = open(self.file, "w")
-                archivo.write(str(self.datos_guardados))
+                archivo.write(str(self.__datos_guardados))
                 archivo.close()
 
                 call(ordenes)
@@ -439,13 +433,13 @@ class Core:
         CompanyName2 = self.CompanyName.get()
         FileDescription2 = self.FileDescription.get()
         FileVersion2 = self.FileVersion.get()
-        FL = FileVersion2
-        
-        FL = FL.replace(".", ",").replace("v", "").replace("V", "")
+        fv = FileVersion2
 
-        FL = eval("["+FL+"]")
+        fv = fv.replace(".", ",").replace("v", "").replace("V", "")
 
-        num = len(FL)
+        fv = eval("["+fv+"]")
+
+        num = len(fv)
 
         if num > 4:
             showinfo("Error",
@@ -454,11 +448,11 @@ class Core:
 
         else:
             while num < 4:
-                FL.append(0)
+                fv.append(0)
                 num += 1
 
-        FL = str(FL)
-        FL = FL.replace("[", "").replace("]", "")
+        fv = str(fv)
+        fv = fv.replace("[", "").replace("]", "")
   
 
         InternalName2 = self.InternalName.get()
@@ -471,8 +465,8 @@ class Core:
         file_version = """
 VSVersionInfo(
 	ffi=FixedFileInfo(
-		filevers=("""+FL+"""),
-		prodvers=("""+FL+"""),
+		filevers=("""+fv+"""),
+		prodvers=("""+fv+"""),
 		mask=0x3f,
 		flags=0x0,
 		OS=0x40004,

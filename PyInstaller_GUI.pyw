@@ -1,5 +1,4 @@
-from tkinter import Tk, Frame, Label, Entry, Button, Menu, \
-    Checkbutton, Toplevel
+from tkinter import Tk, Frame, Label, Entry, Button, Menu, Checkbutton, Toplevel
 from lib.pygui import Core
 
 
@@ -180,8 +179,7 @@ Label(frame, text="o").grid(row=6, column=0, rowspan=4)
 Button(frame, text="Agregar carpeta", command=core.agregar_carpeta).grid(row=8, column=0, rowspan=3)
 
 Checkbutton(frame, text="Archivo de version", variable=core.var_file_version, command=lambda:opciones(1)).grid(row=5, column=7)
-caja_resultado = Label(frame, textvariable=core.var_status_file_version)
-caja_resultado.grid(row=6, column=7)
+Label(frame, textvariable=core.var_status_file_version).grid(row=6, column=7)
 
 Button(frame, text=core.words[7], command=core.Build, font=12, bd=5).grid(row=9, column=7, padx=10, rowspan=2)
 
