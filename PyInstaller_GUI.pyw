@@ -83,23 +83,28 @@ def opciones(op):
 
 
     if op==1:
+        # Abrir y cerrar ventana, 'Archivo de version'
         if core.var_file_version.get():
             start()
         else:
             if root2:
                 root2.destroy()
     elif op==2:
+        # Cancelar
         root2.destroy()
 
     elif op==3:
+        # Guardar
         core.crear_file_version()
 
     elif op ==4:
+        # Español
         a = core.Cambiar_idioma(1)
         if a:
             root.destroy()
 
     elif op == 5:
+        # Ingles
         a = core.Cambiar_idioma(2)
         if a:
             root.destroy()
