@@ -1,1 +1,0 @@
-The program requires python version 3 installed on the computer.
