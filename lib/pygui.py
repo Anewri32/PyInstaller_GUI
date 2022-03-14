@@ -1,14 +1,17 @@
 from tkinter import StringVar, BooleanVar, filedialog
 from tkinter.messagebox import showinfo, showwarning
 from subprocess import call
-from os.path import dirname # Devuelve el directorio de un archivo
+from os.path import dirname
 from cryptocode import encrypt, decrypt
 
 
 class Core:
 
     def __init__(self):
-        self.__passkey = '6@2%*mNGf7rk@F' # Utilizada para encryptar la 'key' en el archivo 'data.py'
+        # Utilizada para encryptar la 'key' en el archivo 'data.py'
+        # Puede ser cambiada pero recuerde que NO es la 'key' con la que se cifra el archivo 'exe'.
+        self.__passkey = '6@2%*mNGf7rk@F'
+
         self.windowed = BooleanVar()
         self.onefile = BooleanVar()
         self.icon = BooleanVar()
@@ -20,9 +23,10 @@ class Core:
         self.admin = BooleanVar()
         self.directorio_actual = ""
 
-
-        self.entry1_a = StringVar()#Aqui va la ruta del archivo o carpeta de origen
-        self.entry1_b = StringVar()#Aqui va la carpeta de destino
+        # 'entry*_a' Aqui va la ruta del archivo o carpeta de origen
+        self.entry1_a = StringVar()
+        # 'entry*_b' Aqui va la carpeta de destino
+        self.entry1_b = StringVar()
         self.entry2_a = StringVar()
         self.entry2_b = StringVar()
         self.entry3_a = StringVar()
@@ -34,13 +38,12 @@ class Core:
         self.entry6_a = StringVar()
         self.entry6_b = StringVar()
 
-        #Variables para las opciones avanzadas "Archivo de version"
+        #Variables del Archivo de version
 
         self.var_file_version = BooleanVar()
         self.var_status_file_version = StringVar()
         self.var_status_file_version.set("?")
         self.file_version_name = "lib/VSVersionInfo.temp"
-
 
         self.CompanyName = StringVar()
         self.FileDescription = StringVar()
@@ -96,6 +99,9 @@ class Core:
 
         except:
             self.language = "es"
+
+            # La sigueinte variable se utiliza para guardar los datos, esta va cambiando en el
+            # transcurso de la ejecucion.
             self.__datos_guardados = [self.language, #0
             "", #1
             False, #2
@@ -129,7 +135,8 @@ class Core:
             "", #30
             ]
         
-        
+        # La siguiente instruccion se utiliza para manejar el idioma, se planea exportar
+        # esta instruccion a un archivo externo para que sea mas personalizable.
         if self.language == "es":
             self.words = (
                 "Archivo",  # 0
@@ -357,7 +364,7 @@ class Core:
 
 
                 else:
-                    call("pip install tinyaes")
+                    #Necesita tener instalado 'tinyaes'
                     ordenes += "--key=" + clave + " "
             
             

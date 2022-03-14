@@ -1,13 +1,17 @@
 from tkinter import Tk, Frame, Label, Entry, Button, Menu, Checkbutton, Toplevel
 from lib.pygui import Core
 
-
+PyInstaller_GUI = "PyInstaller_GUI v2.0"
 # ------------------------------------------------------CORE_INTERFACE---------------------------------------------
 root = Tk()
-root.iconbitmap('lib/icon.ico')
+try:
+    # Puede fallar si se ejecuta en linux
+    root.iconbitmap('lib/icon.ico')
+except:
+    pass
 barra_menu = Menu(root)
 root.config(menu=barra_menu)
-root.title("PyInstaller GUI v2.0")
+root.title(PyInstaller_GUI)
 root.resizable(0, 0)
 frame = Frame(root).grid(row=0, column=0)
 
@@ -25,8 +29,12 @@ def opciones(op):
     def start():
         global root2
         root2 = Toplevel()
-        root2.iconbitmap('lib/icon.ico')
-        root2.title("PyInstaller GUI v1.1 - Archivo de version")
+        try:
+            # Puede fallar si se ejecuta en linux
+            root2.iconbitmap('lib/icon.ico')
+        except:
+            pass
+        root2.title(PyInstaller_GUI + " - Archivo de version")
         root2.resizable(0, 0)
 
 
