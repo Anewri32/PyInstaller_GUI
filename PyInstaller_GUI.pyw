@@ -1,5 +1,5 @@
 from tkinter import Tk, Frame, Label, Entry, Button, Menu, Checkbutton, Toplevel
-from lib.pygui import Core
+from lib.pg_core import Core
 
 PyInstaller_GUI = "PyInstaller_GUI v2.0"
 # ------------------------------------------------------CORE_INTERFACE---------------------------------------------
