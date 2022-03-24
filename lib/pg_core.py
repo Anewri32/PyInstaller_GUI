@@ -2,13 +2,17 @@ from tkinter import StringVar, BooleanVar, filedialog
 from tkinter.messagebox import showinfo, showwarning
 from subprocess import call
 from os.path import dirname
-from cryptocode import encrypt, decrypt
+try:
+    from cryptocode import encrypt, decrypt
+except:
+    call("pip install cryptocode")
+    from cryptocode import encrypt, decrypt
 
 
 class Core:
 
     def __init__(self):
-        # Utilizada para encryptar la 'key' en el archivo 'data.py'
+        # Utilizada para encryptar el archivo 'data.dat'
         # Puede ser cambiada pero recuerde que NO es la 'key' con la que se cifra el archivo 'exe'.
         self.__passkey = '6@2%*mNGf7rk@F'
 
@@ -17,7 +21,7 @@ class Core:
         self.icon = BooleanVar()
         self.file_ico = StringVar()
         self.file_py = StringVar()
-        self.file = 'lib/data.py'
+        self.file = 'lib/data.dat'
         self.key = StringVar()
         self.clean = BooleanVar()
         self.admin = BooleanVar()
@@ -58,7 +62,7 @@ class Core:
 
         try:
             archivo = open(self.file, "r")
-            self.__datos_guardados = eval(archivo.read())
+            self.__datos_guardados = eval(decrypt(archivo.read(), self.__passkey))
             archivo.close()
 
             self.language = self.__datos_guardados[0] #0
@@ -67,7 +71,7 @@ class Core:
             self.onefile.set(self.__datos_guardados[3]), #3
             self.icon.set(self.__datos_guardados[4]), #4
             self.file_ico.set(self.__datos_guardados[5]), #5
-            self.key.set(decrypt(self.__datos_guardados[6], self.__passkey)), #6
+            self.key.set(self.__datos_guardados[6]), #6
             self.clean.set(self.__datos_guardados[7]), #7
             self.entry1_a.set(self.__datos_guardados[8]), #8
             self.entry1_b.set(self.__datos_guardados[9]), #9
@@ -108,7 +112,7 @@ class Core:
             False, #3
             False, #4
             "", #5
-            encrypt("", self.__passkey), #6
+            "", #6
             False, #7
             "", #8
             "", #9
@@ -194,7 +198,7 @@ class Core:
         def cambio_idioma(op1):
             file_language = open(self.file, "w+")
             self.__datos_guardados[0] = op1
-            file_language.write(str(self.__datos_guardados))
+            file_language.write(encrypt(str(self.__datos_guardados), self.__passkey))
             file_language.close()
             showinfo(self.words[12], self.words[13])
             
@@ -365,6 +369,7 @@ class Core:
 
                 else:
                     #Necesita tener instalado 'tinyaes'
+                    call("pip install tinyaes")
                     ordenes += "--key=" + clave + " "
             
             
@@ -398,7 +403,7 @@ class Core:
                     self.onefile.get(), #3
                     self.icon.get(), #4
                     self.file_ico.get(), #5
-                    encrypt(clave, self.__passkey), #6
+                    clave, #6
                     self.clean.get(), #7
                     self.entry1_a.get(), #8
                     self.entry1_b.get(), #9
@@ -427,7 +432,7 @@ class Core:
                 ]
 
                 archivo = open(self.file, "w")
-                archivo.write(str(self.__datos_guardados))
+                archivo.write(encrypt(str(self.__datos_guardados), self.__passkey))
                 archivo.close()
 
                 call(ordenes)
