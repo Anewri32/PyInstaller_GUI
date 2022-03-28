@@ -46,7 +46,6 @@ class Core:
 
         self.var_file_version = BooleanVar()
         self.var_status_file_version = StringVar()
-        self.var_status_file_version.set("?")
         self.file_version_name = "lib/VSVersionInfo.temp"
 
         self.CompanyName = StringVar()
@@ -89,7 +88,9 @@ class Core:
 
             self.directorio_actual = self.__datos_guardados[21], #21
 
-            self.var_file_version.set(self.__datos_guardados[22]), #22
+            # Se omitira la variable para evitar compilaciones con Copiright erroneos.
+            #self.var_file_version.set(self.__datos_guardados[22]), #22
+            
             self.CompanyName.set(self.__datos_guardados[23]), #23
             self.FileDescription.set(self.__datos_guardados[24]), #24
             self.FileVersion.set(self.__datos_guardados[25]), #25
@@ -391,7 +392,7 @@ class Core:
             #La siguiente funcion recolecta los archivos y carpetas para ser añadidas al ejecutable
             ordenes+=self.__preparando_archivos()       
 
-            if self.var_file_version.get() and self.var_status_file_version.get()!="?":
+            if self.var_file_version.get() and self.var_status_file_version.get() == "*ArchivoVersion creado":
                 ordenes+=" --version-file=" + self.file_version_name + " "
 
             ordenes += self.file_py.get()
@@ -509,7 +510,7 @@ VSVersionInfo(
         archivo = open(self.file_version_name, "w")
         archivo.write(file_version)
         archivo.close()
-        self.var_status_file_version.set("*ArchivoVersion creado")
+        self.var_status_file_version.set("*ArchivoVersion archivado")
 
 
 

@@ -55,7 +55,7 @@ def opciones(op):
         entry7 = Entry(root2, width=66, textvariable=core.ProductName)
         label8 = Label(root2, text="ProductVersion:")
         entry8 = Entry(root2, width=66, textvariable=core.ProductVersion)
-        Button(root2, text="Guardar", command=lambda:opciones(3)).grid(row=8, column=0, columnspan=2)
+        Button(root2, text="Guardar/Usar", command=lambda:opciones(3)).grid(row=8, column=0, columnspan=2)
         Button(root2, text="Cancelar", command=lambda:opciones(2)).grid(row=8, column=2, columnspan=2)
 
 
@@ -85,6 +85,7 @@ def opciones(op):
     if op==1:
         # Abrir y cerrar ventana, 'Archivo de version'
         if core.var_file_version.get():
+            core.var_status_file_version.set("?")
             start()
         else:
             if root2:
