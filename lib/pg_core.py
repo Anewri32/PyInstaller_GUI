@@ -2,6 +2,7 @@ from tkinter import StringVar, BooleanVar, filedialog
 from tkinter.messagebox import showinfo, showwarning
 from subprocess import call
 from os.path import dirname
+
 try:
     from cryptocode import encrypt, decrypt
 except:
@@ -350,12 +351,13 @@ class Core:
         clave = self.key.get()
 
 
+        file_pyTemp = self.file_py.get()
 
-
-        if ".py" not in self.file_py.get():
+        if ".py" not in file_pyTemp:
             showinfo(self.words[10], self.words[11])
             
         else:
+
             ordenes = "pyinstaller "
 
             if clave:
@@ -392,7 +394,8 @@ class Core:
             #La siguiente funcion recolecta los archivos y carpetas para ser añadidas al ejecutable
             ordenes+=self.__preparando_archivos()       
 
-            if self.var_file_version.get() and self.var_status_file_version.get() == "*ArchivoVersion creado":
+            if self.var_file_version.get() and self.var_status_file_version.get() != "?":
+                print("Se ah incluido el archivo de version")
                 ordenes+=" --version-file=" + self.file_version_name + " "
 
             ordenes += self.file_py.get()
