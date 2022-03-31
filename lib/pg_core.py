@@ -3,19 +3,10 @@ from tkinter.messagebox import showinfo, showwarning
 from subprocess import call
 from os.path import dirname
 
-try:
-    from cryptocode import encrypt, decrypt
-except:
-    call("pip install cryptocode")
-    from cryptocode import encrypt, decrypt
-
 
 class Core:
 
     def __init__(self):
-        # Utilizada para encryptar el archivo 'data.dat'
-        # Puede ser cambiada pero recuerde que NO es la 'key' con la que se cifra el archivo 'exe'.
-        self.__passkey = '6@2%*mNGf7rk@F'
 
         self.windowed = BooleanVar()
         self.onefile = BooleanVar()
@@ -62,7 +53,7 @@ class Core:
 
         try:
             archivo = open(self.file, "r")
-            self.__datos_guardados = eval(decrypt(archivo.read(), self.__passkey))
+            self.__datos_guardados = eval(archivo.read())
             archivo.close()
 
             self.language = self.__datos_guardados[0] #0
@@ -200,7 +191,7 @@ class Core:
         def cambio_idioma(op1):
             file_language = open(self.file, "w+")
             self.__datos_guardados[0] = op1
-            file_language.write(encrypt(str(self.__datos_guardados), self.__passkey))
+            file_language.write(str(self.__datos_guardados))
             file_language.close()
             showinfo(self.words[12], self.words[13])
             
@@ -436,7 +427,7 @@ class Core:
                 ]
 
                 archivo = open(self.file, "w")
-                archivo.write(encrypt(str(self.__datos_guardados), self.__passkey))
+                archivo.write(str(self.__datos_guardados))
                 archivo.close()
 
                 call(ordenes)
