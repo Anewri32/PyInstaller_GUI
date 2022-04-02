@@ -1,37 +1,37 @@
-## Welcome to GitHub Pages
+# PyInstaller_GUI V2.0
+Este repositorio contiene el script Pyinstaller de forma gráfica para facilitarnos un poco la creación de programas ejecutables. Requiere `Python 3`.
 
-You can use the [editor on GitHub](https://github.com/anewri32/PyInstaller_GUI/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Esta es una iniciativa para transportar esas herramientas vitales que usamos cuando programamos en python, así ahorramos tiempo ya que en lugar de escribir y memorizar codigo, lo único que tendremos que hacer será dar un par de clics.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Eres libre de agregar o modificar lo que quieras, perfeccionemos juntos esta herramienta gráfica.
 
-### Markdown
+## PyInstaller_GUI puede hacer lo siguiente:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+* La posibilidad de elegir el icono del "exe".
 
-```markdown
-Syntax highlighted code block
+* Elegir si se crea un archivo unico o distribuido en carpetas.
 
-# Header 1
-## Header 2
-### Header 3
+* Elegir si se desea el programa ventaneado o no.
 
-- Bulleted
-- List
+* Brinda la posibilidad de cifrar el codigo del programa.
 
-1. Numbered
-2. List
+* La opcion para correr el programa con permisos de administrador.
 
-**Bold** and _Italic_ and `Code` text
+* La opcion para vaciar la cache y compilar el programa sin ningun error o interferencia del codigo anterior.
 
-[Link](url) and ![Image](src)
-```
+* Agregar de manera sencilla los archivos y carpetas al "exe", para esto vea el apartado a continuacion llamado `Funcion que resuelve rutas`.
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+* La posibilidad de incluir informacion en el "exe" sobre la version, nombre, compañia, ect.
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/anewri32/PyInstaller_GUI/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## Funcion que resuelve rutas:
 
-### Support or Contact
+Pyinstaller y PyInstaller_GUI dan la posibilidad de añadir archivos al exe, pero ambos necesitan que los mismos programas sean quienes resuelvan las rutas de sus respectivos archivos, es por esto que depende de usted agregar esta caracteristica a su codigo.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+A continuacion un ejemplo de lo que seria una funcion que resuelve rutas:
+
+[`Resolver_ruta.py`](https://github.com/anewri32/PyInstaller_GUI/blob/main/Resolver_ruta.py)
+
+
+    
+
