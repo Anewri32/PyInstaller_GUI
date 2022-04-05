@@ -24,6 +24,11 @@ Eres libre de agregar o modificar lo que quieras, perfeccionemos juntos esta her
 * La posibilidad de incluir informacion en el "exe" sobre la version, nombre, compañia, ect.
 
 
+## Uso
+
+El uso de esta aplicacion es tan simple como clonar o descargar en zip el repositorio, seguido de ejecutar el archivo [`PyInstaller_GUI`](https://github.com/anewri32/PyInstaller_GUI/blob/main/PyInstaller_GUI.pyw), y eso es todo. La interfaz fue hecha para que sea intiutiva, no le costara usarla.
+
+
 ## Funcion que resuelve rutas:
 
 Pyinstaller y PyInstaller_GUI dan la posibilidad de añadir archivos al exe, pero ambos necesitan que los mismos programas sean quienes resuelvan las rutas de sus respectivos archivos, es por esto que depende de usted agregar esta caracteristica a su codigo.
