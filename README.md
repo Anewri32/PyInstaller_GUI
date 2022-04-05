@@ -19,14 +19,14 @@ Eres libre de agregar o modificar lo que quieras, perfeccionemos juntos esta her
 
 * La opcion para vaciar la cache y compilar el programa sin ningun error o interferencia del codigo anterior.
 
-* Agregar de manera sencilla los archivos y carpetas al "exe", para esto vea el apartado a continuacion llamado `Funcion que resuelve rutas`.
+* Agregar de manera sencilla los archivos y carpetas al "exe", para esto vea el apartado a continuacion llamado [`Funcion que resuelve rutas`](https://github.com/anewri32/PyInstaller_GUI#funcion-que-resuelve-rutas).
 
 * La posibilidad de incluir informacion en el "exe" sobre la version, nombre, compañia, ect.
 
 
 ## Uso
 
-El uso de esta aplicacion es tan simple como clonar o descargar en zip el repositorio, seguido de ejecutar el archivo [`PyInstaller_GUI`](https://github.com/anewri32/PyInstaller_GUI/blob/main/PyInstaller_GUI.pyw), y eso es todo. La interfaz fue hecha para que sea intiutiva, no le costara usarla.
+El uso de esta aplicacion es tan simple como clonar o descargar en zip el repositorio, seguido de ejecutar el archivo `PyInstaller_GUI`, y eso es todo. La interfaz fue hecha para que sea intiutiva, no le costara usarla.
 
 
 ## Funcion que resuelve rutas:
