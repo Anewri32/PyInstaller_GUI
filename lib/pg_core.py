@@ -437,8 +437,7 @@ class Core:
 
 
     def crear_file_version(self):
-        CompanyName2 = self.CompanyName.get()
-        FileDescription2 = self.FileDescription.get()
+
         FileVersion2 = self.FileVersion.get()
         fv = FileVersion2
 
@@ -462,12 +461,6 @@ class Core:
         fv = fv.replace("[", "").replace("]", "")
   
 
-        InternalName2 = self.InternalName.get()
-        LegalCopyright2 = self.LegalCopyright.get()
-        OriginalFilename2 = self.OriginalFilename.get()
-        ProductName2 = self.ProductName.get()
-        ProductVersion2 = self.ProductVersion.get()
-
 
         file_version = """
 VSVersionInfo(
@@ -486,14 +479,14 @@ VSVersionInfo(
             [
                 StringTable(
                     u'040904B0',
-                    [StringStruct(u'CompanyName', u'"""+CompanyName2+"""'),
-                        StringStruct(u'FileDescription', u'"""+FileDescription2+"""'),
+                    [StringStruct(u'CompanyName', u'"""+self.CompanyName.get()+"""'),
+                        StringStruct(u'FileDescription', u'"""+self.FileDescription.get()+"""'),
                         StringStruct(u'FileVersion', u'"""+FileVersion2+""" (win7sp1_rtm.101119-1850)'), 
-                        StringStruct(u'InternalName', u'"""+InternalName2+"""'),
-                        StringStruct(u'LegalCopyright', u'"""+LegalCopyright2+"""'),
-                        StringStruct(u'OriginalFilename', u'"""+OriginalFilename2+"""'),
-                        StringStruct(u'ProductName', u'"""+ProductName2+"""'),
-                        StringStruct(u'ProductVersion', u'"""+ProductVersion2+"""')
+                        StringStruct(u'InternalName', u'"""+self.InternalName.get()+"""'),
+                        StringStruct(u'LegalCopyright', u'"""+self.LegalCopyright.get()+"""'),
+                        StringStruct(u'OriginalFilename', u'"""+self.OriginalFilename.get()+"""'),
+                        StringStruct(u'ProductName', u'"""+self.ProductName.get()+"""'),
+                        StringStruct(u'ProductVersion', u'"""+self.ProductVersion.get()+"""')
                     ]
                 )
             ]
