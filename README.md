@@ -45,5 +45,11 @@ def resolver_ruta(ruta_relativa):
         return os.path.join(sys._MEIPASS, ruta_relativa)
     return os.path.join(os.path.abspath('.'), ruta_relativa)
 ```
+### Ejemplo de la llamada a la funcion:
+```py
+# Normalmente la ruta se especifica de esta manera:
+root.iconbitmap('icon.ico')
 
-    
+# Entonces, para incluir la funcion que resuelve rutas, se coloca de esta manera:
+root.iconbitmap(resolver_ruta('icon.ico'))    
+```
