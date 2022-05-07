@@ -19,9 +19,14 @@ Eres libre de agregar o modificar lo que quieras, perfeccionemos juntos esta her
 
 * La opcion para vaciar la cache y compilar el programa sin ningun error o interferencia del codigo anterior.
 
-* Agregar de manera sencilla los archivos y carpetas al "exe", para esto vea el apartado a continuacion llamado `Funcion que resuelve rutas`.
+* Agregar de manera sencilla los archivos y carpetas al "exe", para esto vea el apartado a continuacion llamado [`Funcion que resuelve rutas`](https://github.com/anewri32/PyInstaller_GUI#funcion-que-resuelve-rutas).
 
 * La posibilidad de incluir informacion en el "exe" sobre la version, nombre, compañia, ect.
+
+
+## Uso
+
+El uso de esta aplicacion es tan simple como clonar o descargar en zip el repositorio, seguido de ejecutar el archivo `PyInstaller_GUI`, y eso es todo. La interfaz fue hecha para que sea intiutiva, no le costara usarla.
 
 
 ## Funcion que resuelve rutas:
@@ -30,8 +35,21 @@ Pyinstaller y PyInstaller_GUI dan la posibilidad de añadir archivos al exe, per
 
 A continuacion un ejemplo de lo que seria una funcion que resuelve rutas:
 
+
 [`Resolver_ruta.py`](https://github.com/anewri32/PyInstaller_GUI/blob/main/Resolver_ruta.py)
+```py
+import os, sys
 
+def resolver_ruta(ruta_relativa):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, ruta_relativa)
+    return os.path.join(os.path.abspath('.'), ruta_relativa)
+```
+### Ejemplo de la llamada a la funcion:
+```py
+# Normalmente la ruta se especifica de esta manera:
+root.iconbitmap('img/icon.ico')
 
-    
-
+# Entonces, para incluir la funcion que resuelve rutas, se coloca de esta manera:
+root.iconbitmap(resolver_ruta('img/icon.ico'))    
+```
