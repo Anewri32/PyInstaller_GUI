@@ -1,12 +1,16 @@
 from tkinter import StringVar, BooleanVar, filedialog
 from tkinter.messagebox import showinfo, showwarning
-from subprocess import call
+from subprocess import run, call
 from os.path import dirname
+import platform
 
 
 class Core:
 
     def __init__(self):
+
+        self.system_type = platform.system()
+        print("Estamos en {}".format(self.system_type))
 
         self.windowed = BooleanVar()
         self.onefile = BooleanVar()
@@ -206,15 +210,24 @@ class Core:
 
     def prueba(self, ordenes):
         try:
-            call("pyinstaller")
+            run("pyinstaller")
 
         except FileNotFoundError:
             showinfo(self.words[17], self.words[18])
-            if call("pip install pyinstaller") == 1:
+            if self.system_type.__eq__("Windows"):
+                ejecucion = call("pip install pyinstaller")
+            elif self.system_type.__eq__("Linux"):
+                ejecucion = call("pip install pyinstaller", shell=True)
+
+
+            if  ejecucion == 1:
                 showwarning(self.words[10], self.words[19])
             else:
                 try:
-                    call(ordenes)
+                    if self.system_type.__eq__("Windows"):
+                        call(ordenes)
+                    elif self.system_type.__eq__("Linux"):
+                        call(ordenes, shell=True)
                 except:
                     showwarning(self.words[10], self.words[20])
 
@@ -229,7 +242,10 @@ class Core:
         open_file = filedialog.askopenfilename(initialdir=self.directorio_actual, title=self.words[14],
                                                filetypes=(("pyinstaller files", "*.spec"), ("", "*.*")))
         if ".spec" in open_file:
-            call("pyinstaller " + open_file)
+            if self.system_type.__eq__("Windows"):
+                run("pyinstaller " + open_file)
+            elif self.system_type.__eq__("Linux"):
+                run("pyinstaller " + open_file, shell=True)
             self.directorio_actual = dirname(open_file)
 
     def Abrir_icono(self):
@@ -354,7 +370,10 @@ class Core:
 
                 else:
                     # Necesita tener instalado 'tinyaes'
-                    call("pip install tinyaes")
+                    if self.system_type.__eq__("Windows"):
+                        run("pip install tinyaes")
+                    elif self.system_type.__eq__("Linux"):
+                        run("pip install tinyaes", shell=True)
                     ordenes += "--key=" + clave + " "
 
             if self.windowed.get():
@@ -418,9 +437,10 @@ class Core:
                 archivo = open(self.file, "w")
                 archivo.write(str(self.__datos_guardados))
                 archivo.close()
-
-                call(ordenes)
-
+                if self.system_type.__eq__("Windows"):
+                    run(ordenes)
+                elif self.system_type.__eq__("Linux"):
+                    run(ordenes, shell=True)
             except FileNotFoundError:
                 self.prueba(ordenes)
 
