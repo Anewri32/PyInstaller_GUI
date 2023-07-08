@@ -1,6 +1,11 @@
-from tkinter import Tk, Frame, Label, Entry, Button, Menu, Checkbutton, Toplevel
-from lib.PGcore import Core
-
+try:
+    from tkinter import Tk, Frame, Label, Entry, Button, Menu, Checkbutton, Toplevel
+    from lib.PGcore import Core
+except:
+    from lib.depend import installDepend
+    installDepend()
+    from tkinter import Tk, Frame, Label, Entry, Button, Menu, Checkbutton, Toplevel
+    from lib.PGcore import Core
 PyInstaller_GUI = "PyInstaller_GUI v2.0"
 # ------------------------------------------------------CORE_INTERFACE---------------------------------------------
 root = Tk()
