@@ -1,3 +1,4 @@
 *.toc
 *.spec
 *.pyc
+lib/data.dat
