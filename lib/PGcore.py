@@ -346,11 +346,8 @@ class Core:
 
         if ".py" not in file_pytemp:
             showinfo(self.words[10], self.words[11])
-
         else:
-
             ordenes = "pyinstaller "
-
             if clave:
                 if " " in clave:
                     showinfo(self.words[10], self.words[21])
@@ -388,46 +385,44 @@ class Core:
 
             ordenes += file_pytemp
 
+            self.__datos_guardados = [self.language,  # 0
+                                    self.file_py.get(),  # 1
+                                    self.windowed.get(),  # 2
+                                    self.onefile.get(),  # 3
+                                    self.icon.get(),  # 4
+                                    self.file_ico.get(),  # 5
+                                    clave,  # 6
+                                    self.clean.get(),  # 7
+                                    self.entry1_a.get(),  # 8
+                                    self.entry1_b.get(),  # 9
+                                    self.entry2_a.get(),  # 10
+                                    self.entry2_b.get(),  # 11
+                                    self.entry3_a.get(),  # 12
+                                    self.entry3_b.get(),  # 13
+                                    self.entry4_a.get(),  # 14
+                                    self.entry4_b.get(),  # 15
+                                    self.entry5_a.get(),  # 16
+                                    self.entry5_b.get(),  # 17
+                                    self.entry6_a.get(),  # 18
+                                    self.entry6_b.get(),  # 19
+                                    self.admin.get(),  # 20
+                                    self.directorio_actual,  # 21
+                                    self.var_file_version.get(),  # 22
+                                    self.CompanyName.get(),  # 23
+                                    self.FileDescription.get(),  # 24
+                                    self.FileVersion.get(),  # 25
+                                    self.InternalName.get(),  # 26
+                                    self.LegalCopyright.get(),  # 27
+                                    self.OriginalFilename.get(),  # 28
+                                    self.ProductName.get(),  # 29
+                                    self.ProductVersion.get(),  # 30
+                                    ]
+            archivo = open(self.file, "w")
+            archivo.write(str(self.__datos_guardados))
+            archivo.close()
             try:
-                self.__datos_guardados = [self.language,  # 0
-                                          self.file_py.get(),  # 1
-                                          self.windowed.get(),  # 2
-                                          self.onefile.get(),  # 3
-                                          self.icon.get(),  # 4
-                                          self.file_ico.get(),  # 5
-                                          clave,  # 6
-                                          self.clean.get(),  # 7
-                                          self.entry1_a.get(),  # 8
-                                          self.entry1_b.get(),  # 9
-                                          self.entry2_a.get(),  # 10
-                                          self.entry2_b.get(),  # 11
-                                          self.entry3_a.get(),  # 12
-                                          self.entry3_b.get(),  # 13
-                                          self.entry4_a.get(),  # 14
-                                          self.entry4_b.get(),  # 15
-                                          self.entry5_a.get(),  # 16
-                                          self.entry5_b.get(),  # 17
-                                          self.entry6_a.get(),  # 18
-                                          self.entry6_b.get(),  # 19
-                                          self.admin.get(),  # 20
-                                          self.directorio_actual,  # 21
-
-                                          self.var_file_version.get(),  # 22
-                                          self.CompanyName.get(),  # 23
-                                          self.FileDescription.get(),  # 24
-                                          self.FileVersion.get(),  # 25
-                                          self.InternalName.get(),  # 26
-                                          self.LegalCopyright.get(),  # 27
-                                          self.OriginalFilename.get(),  # 28
-                                          self.ProductName.get(),  # 29
-                                          self.ProductVersion.get(),  # 30
-                                          ]
-
-                archivo = open(self.file, "w")
-                archivo.write(str(self.__datos_guardados))
-                archivo.close()
-                run(ordenes, shell=True)
-            except FileNotFoundError:
+                assert run(ordenes, shell=True) == "00"
+            except:
                 self.prueba(ordenes)
 
     def crear_file_version(self):
