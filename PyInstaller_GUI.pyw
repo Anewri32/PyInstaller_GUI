@@ -6,12 +6,14 @@ except:
     installDepend()
     from tkinter import Tk, Frame, Label, Entry, Button, Menu, Checkbutton, Toplevel
     from lib.PGcore import Core
+from Resolver_ruta import resolver_ruta
 PyInstaller_GUI = "PyInstaller_GUI v2.0"
 # ------------------------------------------------------CORE_INTERFACE---------------------------------------------
 root = Tk()
+icon_path = 'lib/icon.ico'
 try:
     # Puede fallar si se ejecuta en linux
-    root.iconbitmap('lib/icon.ico')
+    root.iconbitmap(resolver_ruta(icon_path))
 except:
     pass
 barra_menu = Menu(root)
@@ -34,7 +36,7 @@ def opciones(op):
         root2 = Toplevel()
         try:
             # Puede fallar si se ejecuta en linux
-            root2.iconbitmap('lib/icon.ico')
+            root2.iconbitmap(resolver_ruta(icon_path))
         except:
             pass
         root2.title(PyInstaller_GUI + " - Archivo de version")

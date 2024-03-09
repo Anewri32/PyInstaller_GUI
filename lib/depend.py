@@ -1,7 +1,7 @@
 def installDepend():
 	#Check if an dependency has mixin.
 	from subprocess import call
-	from os import sys
+	import sys
 	import platform
 	system_type = platform.system()
 	print("Operating system is {}".format(system_type))
