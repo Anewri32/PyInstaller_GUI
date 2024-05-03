@@ -5,3 +5,4 @@ lib/data.dat
 dist
 build
 /.venv/
+lib/VSVersionInfo.temp
