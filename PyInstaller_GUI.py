@@ -1,26 +1,22 @@
-try:
-    from tkinter import Tk, Frame, Label, Entry, Button, Menu, Checkbutton, Toplevel
-    from lib.PGcore import Core
-except:
-    from lib.depend import installDepend
-    installDepend()
-    from tkinter import Tk, Frame, Label, Entry, Button, Menu, Checkbutton, Toplevel
-    from lib.PGcore import Core
+# Necesitas tener instalado 'pyinstaller' y si usas linux necesitas instalar tkinter.
+
+import tkinter as tk
+from lib.PGcore import Core
 from Resolver_ruta import resolver_ruta
 PyInstaller_GUI = "PyInstaller_GUI v2.0"
 # ------------------------------------------------------CORE_INTERFACE---------------------------------------------
-root = Tk()
+root = tk.Tk()
 icon_path = 'lib/icon.ico'
 try:
     # Puede fallar si se ejecuta en linux
     root.iconbitmap(resolver_ruta(icon_path))
 except:
     pass
-barra_menu = Menu(root)
+barra_menu = tk.Menu(root)
 root.config(menu=barra_menu)
 root.title(PyInstaller_GUI)
-root.resizable(0, 0)
-frame = Frame(root)
+root.resizable(None, None)
+frame = tk.Frame(root)
 frame.grid(row=0, column=0)
 
 root2 = None
@@ -33,33 +29,33 @@ core = Core()
 def opciones(op):
     def start():
         global root2
-        root2 = Toplevel()
+        root2 = tk.Toplevel()
         try:
             # Puede fallar si se ejecuta en linux
             root2.iconbitmap(resolver_ruta(icon_path))
         except:
             pass
         root2.title(PyInstaller_GUI + " - Archivo de version")
-        root2.resizable(0, 0)
+        root2.resizable(None, None)
 
-        label1 = Label(root2, text="CompanyName:")
-        entry1 = Entry(root2, width=66, textvariable=core.CompanyName)
-        label2 = Label(root2, text="FileDescription:")
-        entry2 = Entry(root2, width=66, textvariable=core.FileDescription)
-        label3 = Label(root2, text="FileVersion:")
-        entry3 = Entry(root2, width=66, textvariable=core.FileVersion)
-        label4 = Label(root2, text="InternalName:")
-        entry4 = Entry(root2, width=66, textvariable=core.InternalName)
-        label5 = Label(root2, text="LegalCopyright:")
-        entry5 = Entry(root2, width=66, textvariable=core.LegalCopyright)
-        label6 = Label(root2, text="OriginalFilename:")
-        entry6 = Entry(root2, width=66, textvariable=core.OriginalFilename)
-        label7 = Label(root2, text="ProductName:")
-        entry7 = Entry(root2, width=66, textvariable=core.ProductName)
-        label8 = Label(root2, text="ProductVersion:")
-        entry8 = Entry(root2, width=66, textvariable=core.ProductVersion)
-        Button(root2, text="Guardar/Usar", command=lambda: opciones(3)).grid(row=8, column=0, columnspan=2)
-        Button(root2, text="Cancelar", command=lambda: opciones(2)).grid(row=8, column=2, columnspan=2)
+        label1 = tk.Label(root2, text="CompanyName:")
+        entry1 = tk.Entry(root2, width=66, textvariable=core.CompanyName)
+        label2 = tk.Label(root2, text="FileDescription:")
+        entry2 = tk.Entry(root2, width=66, textvariable=core.FileDescription)
+        label3 = tk.Label(root2, text="FileVersion:")
+        entry3 = tk.Entry(root2, width=66, textvariable=core.FileVersion)
+        label4 = tk.Label(root2, text="InternalName:")
+        entry4 = tk.Entry(root2, width=66, textvariable=core.InternalName)
+        label5 = tk.Label(root2, text="LegalCopyright:")
+        entry5 = tk.Entry(root2, width=66, textvariable=core.LegalCopyright)
+        label6 = tk.Label(root2, text="OriginalFilename:")
+        entry6 = tk.Entry(root2, width=66, textvariable=core.OriginalFilename)
+        label7 = tk.Label(root2, text="ProductName:")
+        entry7 = tk.Entry(root2, width=66, textvariable=core.ProductName)
+        label8 = tk.Label(root2, text="ProductVersion:")
+        entry8 = tk.Entry(root2, width=66, textvariable=core.ProductVersion)
+        tk.Button(root2, text="Guardar/Usar", command=lambda: opciones(3)).grid(row=8, column=0, columnspan=2)
+        tk.Button(root2, text="Cancelar", command=lambda: opciones(2)).grid(row=8, column=2, columnspan=2)
 
         label1.grid(row=0, column=0, pady=2.5)
         entry1.grid(row=0, column=1, pady=2.5, columnspan=5)
@@ -109,7 +105,7 @@ def opciones(op):
             root.destroy()
 
 
-def Icon():
+def icon():
     if core.icon.get():
         icono_boton.grid(row=2, column=0)
         icono_entrada.grid(row=2, column=1, columnspan=8, ipadx=250)
@@ -119,13 +115,13 @@ def Icon():
 
 
 # --------------------------------------------------------INTERFACE------------------------------------------------
-file_menu = Menu(barra_menu, tearoff=0)
+file_menu = tk.Menu(barra_menu, tearoff=0)
 barra_menu.add_cascade(label=core.words[0], menu=file_menu)
 file_menu.add_command(label=core.words[1], command=core.Abrir_archivo_py)
 file_menu.add_command(label="Ejecutar .spec", command=core.abrir_archivo_spec)
 file_menu.add_command(label=core.words[2], command=lambda: root.destroy())
 
-idioma_menu = Menu(barra_menu, tearoff=0)
+idioma_menu = tk.Menu(barra_menu, tearoff=0)
 barra_menu.add_cascade(label=core.words[9], menu=idioma_menu)
 idioma_menu.add_command(label="Spanish", command=lambda: opciones(4))
 idioma_menu.add_command(label="English", command=lambda: opciones(5))
@@ -133,54 +129,54 @@ idioma_menu.add_command(label="English", command=lambda: opciones(5))
 # --------------------------------------------------------------------------------------------
 
 
-Label(frame, text=core.words[3]).grid(row=0, column=0, pady=2.5, padx=2.5)
+tk.Label(frame, text=core.words[3]).grid(row=0, column=0, pady=2.5, padx=2.5)
 
-Entry(frame, textvariable=core.file_py).grid(row=0, column=1, columnspan=8, pady=2.5, padx=2.5, ipadx=250)
+tk.Entry(frame, textvariable=core.file_py).grid(row=0, column=1, columnspan=8, pady=2.5, padx=2.5, ipadx=250)
 
-Checkbutton(frame, text=core.words[6], variable=core.icon, command=Icon).grid(row=1, column=0)
+tk.Checkbutton(frame, text=core.words[6], variable=core.icon, command=icon).grid(row=1, column=0)
 
-Checkbutton(frame, text=core.words[5], variable=core.onefile).grid(row=1, column=1)
+tk.Checkbutton(frame, text=core.words[5], variable=core.onefile).grid(row=1, column=1)
 
-Checkbutton(frame, text=core.words[4], variable=core.windowed).grid(row=1, column=3)
+tk.Checkbutton(frame, text=core.words[4], variable=core.windowed).grid(row=1, column=3)
 
-Label(frame, text="key:", anchor="e").grid(row=1, column=4, pady=2.5)
+tk.Label(frame, text="key:", anchor="e").grid(row=1, column=4, pady=2.5)
 
-Entry(frame, textvariable=core.key).grid(row=1, column=5, pady=2.5)
+tk.Entry(frame, textvariable=core.key).grid(row=1, column=5, pady=2.5)
 
-Checkbutton(frame, text="Administrador", variable=core.admin).grid(row=1, column=6)
+tk.Checkbutton(frame, text="Administrador", variable=core.admin).grid(row=1, column=6)
 
-Checkbutton(frame, text="Limpiar cache", variable=core.clean).grid(row=1, column=7)
+tk.Checkbutton(frame, text="Limpiar cache", variable=core.clean).grid(row=1, column=7)
 
-icono_boton = Button(frame, text=core.words[8], command=core.Abrir_icono)
-icono_entrada = Entry(frame, textvariable=core.file_ico)
+icono_boton = tk.Button(frame, text=core.words[8], command=core.Abrir_icono)
+icono_entrada = tk.Entry(frame, textvariable=core.file_ico)
 
-Label(frame, text="Directorios de origen ( Archivos o carpetas) para incluir en el exe.").grid(row=4, column=1,
+tk.Label(frame, text="Directorios de origen ( Archivos o carpetas) para incluir en el exe.").grid(row=4, column=1,
                                                                                                columnspan=5, pady=5)
 
-Entry(frame, width=66, textvariable=core.entry1_a).grid(row=5, column=1, columnspan=5)
-Entry(frame, width=66, textvariable=core.entry2_a).grid(row=6, column=1, columnspan=5)
-Entry(frame, width=66, textvariable=core.entry3_a).grid(row=7, column=1, columnspan=5)
-Entry(frame, width=66, textvariable=core.entry4_a).grid(row=8, column=1, columnspan=5)
-Entry(frame, width=66, textvariable=core.entry5_a).grid(row=9, column=1, columnspan=5)
-Entry(frame, width=66, textvariable=core.entry6_a).grid(row=10, column=1, columnspan=5)
+tk.Entry(frame, width=66, textvariable=core.entry1_a).grid(row=5, column=1, columnspan=5)
+tk.Entry(frame, width=66, textvariable=core.entry2_a).grid(row=6, column=1, columnspan=5)
+tk.Entry(frame, width=66, textvariable=core.entry3_a).grid(row=7, column=1, columnspan=5)
+tk.Entry(frame, width=66, textvariable=core.entry4_a).grid(row=8, column=1, columnspan=5)
+tk.Entry(frame, width=66, textvariable=core.entry5_a).grid(row=9, column=1, columnspan=5)
+tk.Entry(frame, width=66, textvariable=core.entry6_a).grid(row=10, column=1, columnspan=5)
 
-Label(frame, text="Directorios de destino:").grid(row=4, column=6)
-Entry(frame, textvariable=core.entry1_b).grid(row=5, column=6, padx=5)
-Entry(frame, textvariable=core.entry2_b).grid(row=6, column=6, padx=5)
-Entry(frame, textvariable=core.entry3_b).grid(row=7, column=6, padx=5)
-Entry(frame, textvariable=core.entry4_b).grid(row=8, column=6, padx=5)
-Entry(frame, textvariable=core.entry5_b).grid(row=9, column=6, padx=5)
-Entry(frame, textvariable=core.entry6_b).grid(row=10, column=6, padx=5)
+tk.Label(frame, text="Directorios de destino:").grid(row=4, column=6)
+tk.Entry(frame, textvariable=core.entry1_b).grid(row=5, column=6, padx=5)
+tk.Entry(frame, textvariable=core.entry2_b).grid(row=6, column=6, padx=5)
+tk.Entry(frame, textvariable=core.entry3_b).grid(row=7, column=6, padx=5)
+tk.Entry(frame, textvariable=core.entry4_b).grid(row=8, column=6, padx=5)
+tk.Entry(frame, textvariable=core.entry5_b).grid(row=9, column=6, padx=5)
+tk.Entry(frame, textvariable=core.entry6_b).grid(row=10, column=6, padx=5)
 
-Button(frame, text="Agregar archivos", command=core.agregar_archivos).grid(row=5, column=0, rowspan=3)
-Label(frame, text="o").grid(row=6, column=0, rowspan=4)
-Button(frame, text="Agregar carpeta", command=core.agregar_carpeta).grid(row=8, column=0, rowspan=3)
+tk.Button(frame, text="Agregar archivos", command=core.agregar_archivos).grid(row=5, column=0, rowspan=3)
+tk.Label(frame, text="o").grid(row=6, column=0, rowspan=4)
+tk.Button(frame, text="Agregar carpeta", command=core.agregar_carpeta).grid(row=8, column=0, rowspan=3)
 
-Checkbutton(frame, text="Archivo de version", variable=core.var_file_version, command=lambda: opciones(1)).grid(row=5,
+tk.Checkbutton(frame, text="Archivo de version", variable=core.var_file_version, command=lambda: opciones(1)).grid(row=5,
                                                                                                                 column=7)
-Label(frame, textvariable=core.var_status_file_version).grid(row=6, column=7)
+tk.Label(frame, textvariable=core.var_status_file_version).grid(row=6, column=7)
 
-Button(frame, text=core.words[7], command=core.build, font=12, bd=5).grid(row=9, column=7, padx=10, rowspan=2)
+tk.Button(frame, text=core.words[7], command=core.build, font=12, bd=5).grid(row=9, column=7, padx=10, rowspan=2)
 
-Icon()
+icon()
 root.mainloop()

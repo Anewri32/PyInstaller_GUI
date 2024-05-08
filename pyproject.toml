@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "pyinstaller-gui"
+version = "2.0.0"
+description = "Pyinstaller GUI"
+authors = ["Anewri32 <anewri32@gmail.com>"]
+readme = "README.md"
+packages = [{include = "pyinstaller_gui"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+future = "1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

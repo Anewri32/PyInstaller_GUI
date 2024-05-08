@@ -1,60 +1,53 @@
-try:
-    from tkinter import StringVar, BooleanVar, filedialog
-    from tkinter.messagebox import showinfo, showwarning
-    from subprocess import run, call
-    from os.path import dirname
-except:
-    from depend import installDepend
-    installDepend()
-    from tkinter import StringVar, BooleanVar, filedialog
-    from tkinter.messagebox import showinfo, showwarning
-    from subprocess import run, call
-    from os.path import dirname
+import tkinter as tk
+from tkinter.messagebox import showinfo, showwarning
+from subprocess import run, call
+from os.path import dirname
+
 
 class Core:
 
     def __init__(self):
 
-        self.windowed = BooleanVar()
-        self.onefile = BooleanVar()
-        self.icon = BooleanVar()
-        self.file_ico = StringVar()
-        self.file_py = StringVar()
+        self.windowed = tk.BooleanVar()
+        self.onefile = tk.BooleanVar()
+        self.icon = tk.BooleanVar()
+        self.file_ico = tk.StringVar()
+        self.file_py = tk.StringVar()
         self.file = 'lib/data.dat'
-        self.key = StringVar()
-        self.clean = BooleanVar()
-        self.admin = BooleanVar()
+        self.key = tk.StringVar()
+        self.clean = tk.BooleanVar()
+        self.admin = tk.BooleanVar()
         self.directorio_actual = ""
 
         # 'entry*_a' Aqui va la ruta del archivo o carpeta de origen
-        self.entry1_a = StringVar()
+        self.entry1_a = tk.StringVar()
         # 'entry*_b' Aqui va la carpeta de destino
-        self.entry1_b = StringVar()
-        self.entry2_a = StringVar()
-        self.entry2_b = StringVar()
-        self.entry3_a = StringVar()
-        self.entry3_b = StringVar()
-        self.entry4_a = StringVar()
-        self.entry4_b = StringVar()
-        self.entry5_a = StringVar()
-        self.entry5_b = StringVar()
-        self.entry6_a = StringVar()
-        self.entry6_b = StringVar()
+        self.entry1_b = tk.StringVar()
+        self.entry2_a = tk.StringVar()
+        self.entry2_b = tk.StringVar()
+        self.entry3_a = tk.StringVar()
+        self.entry3_b = tk.StringVar()
+        self.entry4_a = tk.StringVar()
+        self.entry4_b = tk.StringVar()
+        self.entry5_a = tk.StringVar()
+        self.entry5_b = tk.StringVar()
+        self.entry6_a = tk.StringVar()
+        self.entry6_b = tk.StringVar()
 
         # Variables del Archivo de version
 
-        self.var_file_version = BooleanVar()
-        self.var_status_file_version = StringVar()
+        self.var_file_version = tk.BooleanVar()
+        self.var_status_file_version = tk.StringVar()
         self.file_version_name = "lib/VSVersionInfo.temp"
 
-        self.CompanyName = StringVar()
-        self.FileDescription = StringVar()
-        self.FileVersion = StringVar()
-        self.InternalName = StringVar()
-        self.LegalCopyright = StringVar()
-        self.OriginalFilename = StringVar()
-        self.ProductName = StringVar()
-        self.ProductVersion = StringVar()
+        self.CompanyName = tk.StringVar()
+        self.FileDescription = tk.StringVar()
+        self.FileVersion = tk.StringVar()
+        self.InternalName = tk.StringVar()
+        self.LegalCopyright = tk.StringVar()
+        self.OriginalFilename = tk.StringVar()
+        self.ProductName = tk.StringVar()
+        self.ProductVersion = tk.StringVar()
 
         try:
             archivo = open(self.file, "r")
@@ -203,7 +196,6 @@ class Core:
             cambioIdioma('es')
             return True
 
-
         elif op == 2 and self.language != "en":
             cambioIdioma('en')
             return True
@@ -228,21 +220,21 @@ class Core:
                     showwarning(self.words[10], self.words[20])
 
     def Abrir_archivo_py(self):
-        open_file = filedialog.askopenfilename(initialdir=self.directorio_actual, title=self.words[14],
+        open_file = tk.filedialog.askopenfilename(initialdir=self.directorio_actual, title=self.words[14],
                                                filetypes=(("python files", "*.py"), ("python files", "*.pyw")))
         if ".py" in open_file:
             self.file_py.set(open_file)
             self.directorio_actual = dirname(open_file)
 
     def abrir_archivo_spec(self):
-        open_file = filedialog.askopenfilename(initialdir=self.directorio_actual, title=self.words[14],
+        open_file = tk.filedialog.askopenfilename(initialdir=self.directorio_actual, title=self.words[14],
                                                filetypes=(("pyinstaller files", "*.spec"), ("", "*.*")))
         if ".spec" in open_file:
             run("pyinstaller " + open_file, shell=True)
             self.directorio_actual = dirname(open_file)
 
     def Abrir_icono(self):
-        open_icon = filedialog.askopenfilename(initialdir=self.directorio_actual, title=self.words[14],
+        open_icon = tk.filedialog.askopenfilename(initialdir=self.directorio_actual, title=self.words[14],
                                                filetypes=((".ico", "*.ico"), (".ico", "*.ico")))
         if ".ico" in open_icon:
             self.file_ico.set(open_icon)
@@ -324,7 +316,7 @@ class Core:
         return instrucciones
 
     def agregar_archivos(self):
-        archivo = filedialog.askopenfilenames(initialdir=self.directorio_actual, title="Agregar archivos",
+        archivo = tk.filedialog.askopenfilenames(initialdir=self.directorio_actual, title="Agregar archivos",
                                               filetypes=((".", "*.*"), ("All files", "*.*")))
         for i in archivo:
             if self.asignar_entrys(i) == False:
@@ -333,7 +325,7 @@ class Core:
         # Devuelve una tupla
 
     def agregar_carpeta(self):
-        archivo = filedialog.askdirectory(initialdir=self.directorio_actual, title="Agregar directorio")
+        archivo = tk.filedialog.askdirectory(initialdir=self.directorio_actual, title="Agregar directorio")
         self.asignar_entrys(archivo)
         self.directorio_actual = archivo
 
